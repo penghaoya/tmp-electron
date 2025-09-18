@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@renderer/*": ["./src/renderer/src/*"],
+      "@shared/*": ["./packages/share/*"],
+      "@main/*": ["./src/main/*"],
+      "@preload/*": ["./src/preload/*"],
+      "@components/*": ["./src/renderer/src/components/*"],
+      "@views/*": ["./src/renderer/src/views/*"],
+      "@store/*": ["./src/renderer/src/store/*"],
+      "@assets/*": ["./src/renderer/src/assets/*"]
+    }
+  }
+}
