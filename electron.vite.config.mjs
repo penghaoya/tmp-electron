@@ -2,6 +2,8 @@ import { resolve } from 'path'
 import { defineConfig, externalizeDepsPlugin } from 'electron-vite'
 import vue from '@vitejs/plugin-vue'
 import UnoCSS from 'unocss/vite'
+import vueJsx from '@vitejs/plugin-vue-jsx'
+import vueDevTools from 'vite-plugin-vue-devtools'
 
 export default defineConfig({
   main: {
@@ -33,6 +35,6 @@ export default defineConfig({
         '@assets': resolve('src/renderer/src/assets')
       }
     },
-    plugins: [vue(), UnoCSS()]
+    plugins: [vue(), UnoCSS(), vueDevTools(), vueJsx({})]
   }
 })
