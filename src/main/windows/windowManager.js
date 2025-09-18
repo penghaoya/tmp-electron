@@ -48,13 +48,15 @@ export function createWindowManager() {
       ...(process.platform === 'linux' ? { icon } : {}),
       webPreferences: {
         preload: preloadPath,
-        sandbox: true,
+        sandbox: false,
         contextIsolation: true,
         nodeIntegration: false,
         enableRemoteModule: false
       }
     })
-
+    if (is.dev) {
+      win.webContents.openDevTools()
+    }
     windowLogger.info('已创建窗口实例', key)
 
     win.on('ready-to-show', () => {
