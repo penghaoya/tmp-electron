@@ -17,7 +17,15 @@ export function createWindowManager() {
     restore: (win) => win.restore(),
     hide: (win) => win.hide(),
     show: (win) => win.show(),
-    toggleDevTools: (win) => win.webContents.toggleDevTools()
+    toggleDevTools: (win) => {
+      if (!win.isVisible()) win.show()
+      if (win.isMinimized()) win.restore()
+      if (win.webContents.isDevToolsOpened()) {
+        win.webContents.closeDevTools()
+      } else {
+        win.webContents.openDevTools({ mode: 'detach' })
+      }
+    }
   }
 
   function create(key, options = {}) {
@@ -108,7 +116,7 @@ export function createWindowManager() {
       windowLogger.warn('未找到对应窗口执行操作', { key, action })
       return
     }
-
+    windowLogger.info('窗口执行操作', { key, action })
     handler(win)
   }
 

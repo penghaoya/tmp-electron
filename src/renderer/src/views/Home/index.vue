@@ -6,7 +6,8 @@
 <script setup>
 import { NButton } from 'naive-ui'
 const handleClick = () => {
-  console.log(window.api)
+  console.log('Button clicked')
+  window.api.window.toggleDevTools()
 }
 </script>
 

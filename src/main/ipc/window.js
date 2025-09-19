@@ -15,11 +15,5 @@ export function registerWindowHandlers() {
   ipcMain.on(IPC_CHANNELS.WINDOW.SETTING, () => {
     createSettingWindow()
   })
-
-  // 通用创建窗口（通过 key 指定）
-  ipcMain.on(IPC_CHANNELS.WINDOW.CREATE, (_event, key) => {
-    if (key === 'main') return createMainWindow()
-    if (key === 'setting') return createSettingWindow()
-  })
 }
 
