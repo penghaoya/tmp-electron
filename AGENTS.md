@@ -123,31 +123,7 @@ new BrowserWindow({
 
 - 不在渲染器中暴露 `ipcRenderer` 或 Node API。
 - 仅通过预加载桥暴露白名单 API（见下一节）。
-- 推荐使用 `app.requestSingleInstanceLock()` 避免多实例。
-
-### 3) 预加载（Context Bridge）
-
-- 仅暴露最小 API：
-
-```js
-// @preload/index.js（示意）
-import { contextBridge, ipcRenderer } from 'electron'
-import { IPC_CHANNELS, WINDOW_ACTIONS } from '@shared/IpcChannel.js'
-
-const api = {
-  window: {
-    control: (action, key = 'main') => {
-      if (!WINDOW_ACTIONS.includes(action)) throw new Error('Invalid action')
-      return ipcRenderer.send(IPC_CHANNELS.WINDOW.CONTROL, action, key)
-    }
-  }
-}
-
-contextBridge.exposeInMainWorld('api', api)
-```
-
-- 避免在任何情况下向 `window` 直接挂载 `ipcRenderer` 或 `electronAPI`。
-- 参数做基本校验（字符串白名单、必填校验），返回 `invoke/handle` 时使用统一结构（见 IPC 规范）。
+- 推荐使用 `app.requestSingleInstanceLock()` 避免多实例。\
 
 ### 4) IPC 通信规范
 

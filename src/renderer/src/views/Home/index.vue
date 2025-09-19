@@ -5,10 +5,18 @@
 
 <script setup>
 import { NButton } from 'naive-ui'
-const handleClick = () => {
+
+import { onMounted } from 'vue'
+const handleClick = async () => {
   console.log('Button clicked')
-  window.api.window.toggleDevTools()
+  window.api.store.set('test', 'tes1111t')
+
+  console.log('store path', await window.api.store.get('them'))
 }
+
+onMounted(async () => {
+  console.log('store path', await window.api.store.get('app.theme'))
+})
 </script>
 
 <style scoped></style>

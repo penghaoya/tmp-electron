@@ -3,6 +3,7 @@ import { electronApp, optimizer } from '@electron-toolkit/utils'
 import { createMainWindow, windowManager } from '@main/windows/index.js'
 import { registerAllIpcHandlers } from '@main/ipc/index.js'
 import createLogger from '@main/utils/logger.js'
+import { initStore } from '@main/utils/store.js'
 
 const gotTheLock = app.requestSingleInstanceLock()
 const logger = createLogger('主进程')
@@ -30,6 +31,7 @@ app.whenReady().then(() => {
   })
 
   registerAllIpcHandlers()
+  initStore()
   // 创建登录窗口
   // createLoginWindow()
   createMainWindow()
