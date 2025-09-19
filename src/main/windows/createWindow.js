@@ -21,8 +21,8 @@ export function createMainWindow() {
 
 export function createLoginWindow() {
   return windowManager.create('login', {
-    width: 350,
-    height: 500,
+    width: 320,
+    height: 440,
     frame: false,
     single: true,
     route: '/login'

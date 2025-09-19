@@ -11,6 +11,9 @@ const api = {
     toggleDevTools: (key = 'main') =>
       ipcRenderer.send(IPC_CHANNELS.WINDOW.CONTROL, 'toggleDevTools', key)
   },
+  win: {
+    openMain: () => ipcRenderer.send(IPC_CHANNELS.WINDOW.MAIN)
+  },
   store: {
     get: (key, defVal) => ipcRenderer.invoke(IPC_CHANNELS.STORE.GET, key, defVal),
     set: (key, val) => ipcRenderer.invoke(IPC_CHANNELS.STORE.SET, key, val),

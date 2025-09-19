@@ -1,9 +1,11 @@
 import { app, BrowserWindow } from 'electron'
 import { electronApp, optimizer } from '@electron-toolkit/utils'
-import { createMainWindow, windowManager } from '@main/windows/index.js'
+import { createMainWindow, createLoginWindow, windowManager } from '@main/windows/index.js'
 import { registerAllIpcHandlers } from '@main/ipc/index.js'
 import createLogger from '@main/utils/logger.js'
 import { initStore } from '@main/utils/store.js'
+
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 
 const gotTheLock = app.requestSingleInstanceLock()
 const logger = createLogger('主进程')
@@ -33,8 +35,8 @@ app.whenReady().then(() => {
   registerAllIpcHandlers()
   initStore()
   // 创建登录窗口
-  // createLoginWindow()
-  createMainWindow()
+  createLoginWindow()
+  // createMainWindow()
   app.on('activate', () => {
     logger.debug('应用激活')
     if (BrowserWindow.getAllWindows().length === 0) {

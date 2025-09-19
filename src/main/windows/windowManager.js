@@ -57,6 +57,7 @@ export function createWindowManager() {
       webPreferences: {
         preload: preloadPath,
         sandbox: false,
+        webSecurity: true,
         contextIsolation: true,
         nodeIntegration: false,
         enableRemoteModule: false
@@ -66,7 +67,8 @@ export function createWindowManager() {
       win.webContents.openDevTools()
     }
     windowLogger.info('已创建窗口实例', key)
-
+    win.setMaximizable(false)
+    win.setResizable(false)
     win.on('ready-to-show', () => {
       windowLogger.debug('窗口已准备显示', key)
       if (!options.hideOnStart) win.show()
