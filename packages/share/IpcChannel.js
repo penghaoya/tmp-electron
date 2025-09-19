@@ -17,6 +17,6 @@ export const IPC_CHANNELS = {
     REMOVE: 'store:remove',
     CLEAR: 'store:clear',
     PATH: 'store:path',
-    CHANGED: 'store:changed' 
+    CHANGED: 'store:changed'
   }
 }

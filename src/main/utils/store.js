@@ -14,15 +14,14 @@ const logger = createLogger('store')
 
 const NAME = 'app-config'
 const DEFAULTS = { app: { theme: 'light', language: 'zh-CN' } }
-
-// 仅用于混淆/防篡改（打包后依然可被查看，非严格安全）
 const ENCRYPTION_KEY = 'Zk2d1N6wQ9r4T8u0H2y5L7c9B3m1V6p2e4s8k0x3n7q1r5t9u3w=='
 
-let _store // 单例
+let _store
 
 function ensure(options = {}) {
   if (_store) return _store
   const cwd = options.cwd ?? app.getPath('userData')
+  // dev: 明文；prod: 加密
   const encryptionKey = is.dev ? undefined : ENCRYPTION_KEY
 
   _store = new (Store?.default || Store)({
@@ -30,7 +29,7 @@ function ensure(options = {}) {
     cwd,
     defaults: DEFAULTS,
     clearInvalidConfig: true,
-    encryptionKey, // dev: 明文；prod: 加密
+    encryptionKey,
     ...options
   })
 
