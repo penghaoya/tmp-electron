@@ -2,6 +2,7 @@ import { app, BrowserWindow } from 'electron'
 import { electronApp, optimizer } from '@electron-toolkit/utils'
 import { createMainWindow, windowManager } from '@main/windows/index.js'
 import { registerAllIpcHandlers } from '@main/ipc/index.js'
+import { initStore } from '@main/utils/store.js'
 import createLogger from '@main/utils/logger.js'
 
 const gotTheLock = app.requestSingleInstanceLock()
@@ -24,6 +25,10 @@ if (!gotTheLock) {
 app.whenReady().then(() => {
   electronApp.setAppUserModelId('com.devtools.')
   logger.info('应用已准备就绪')
+  
+  // 初始化存储
+  initStore()
+  
   app.on('browser-window-created', (_, window) => {
     logger.debug('浏览器窗口已创建')
     optimizer.watchWindowShortcuts(window)

@@ -11,6 +11,13 @@ export const IPC_CHANNELS = {
     // 兼容现有的创建事件（可逐步废弃，推荐使用 CREATE）
     MAIN: 'create:main:window',
     SETTING: 'create:setting:window'
+  },
+  STORE: {
+    GET: 'store:get',
+    SET: 'store:set',
+    REMOVE: 'store:remove',
+    HAS: 'store:has',
+    CLEAR: 'store:clear'
   }
 }
 
